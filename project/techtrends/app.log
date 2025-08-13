@@ -1,0 +1,47 @@
+
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:3111
+ * Running on http://192.168.1.167:3111
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:app:Metrics request successfull
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:12:03] "GET /metrics HTTP/1.1" 200 -
+INFO:app:Post Kubernetes v1.20 Release Notes retrieved
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:12:22] "GET /3 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:12:22] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:3111
+ * Running on http://192.168.1.167:3111
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:app:12/08/2025, 17:24:13, Post: "KubeCon + CloudNativeCon 2021" retrieved!
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:24:13] "GET /2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:24:13] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:3111
+ * Running on http://192.168.1.167:3111
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:app:12/08/2025, 17:29:12, Post with ID: "21" does not exists!
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:29:12] "[33mGET /21 HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:29:12] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+INFO:app:12/08/2025, 17:29:32, "About us" page retrieved!
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:29:32] "GET /about HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:29:32] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:3111
+ * Running on http://192.168.1.167:3111
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:app:12/08/2025, 17:32:01, "About us" page retrieved!
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:32:01] "GET /about HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:32:01] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:32:08] "GET /create HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:32:08] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+INFO:app:12/08/2025, 17:32:38, New post: "New Post 4" created!
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:32:38] "[32mPOST /create HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:32:38] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:32:38] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+INFO:app:12/08/2025, 17:32:43, Post: "New Post 4" retrieved!
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:32:43] "GET /10 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Aug/2025 17:32:43] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
