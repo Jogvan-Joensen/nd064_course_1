@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/<Jogvan-Joensen>/nd064_course_1.git
+    repoURL: https://github.com/Jogvan-Joensen/nd064_course_1.git
     targetRevision: main
     path: project/helm
     helm:

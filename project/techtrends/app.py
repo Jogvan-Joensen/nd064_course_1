@@ -60,12 +60,40 @@ def about():
 
 @app.route('/healthz')
 def healthz():
-    response = app.response_class(
-            response=json.dumps({"result":"OK - healthy"}),
+
+    conn = None
+    try:        
+        conn = get_db_connection()        
+        row = conn.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name='posts';"
+        ).fetchone()
+        if row is None:
+            raise RuntimeError("Missing 'posts' table")       
+        conn.execute("SELECT 1 FROM posts LIMIT 1;")
+
+        # Alt ok 200
+        return app.response_class(
+            response=json.dumps({"result": "OK - healthy"}),
             status=200,
-            mimetype='application/json'
-    )
-    return response
+            mimetype="application/json",
+        )
+    except (sqlite3.Error, RuntimeError) as e:
+        # Fejl 
+        app.logger.error(
+            datetime.now().strftime('%d/%m/%Y, %H:%M:%S')
+            + f', /healthz failed: {e}'
+        )
+        return app.response_class(
+            response=json.dumps({"result": "ERROR - unhealthy"}),
+            status=500,
+            mimetype="application/json",
+        )
+    finally:
+        try:
+            if conn is not None:
+                conn.close()
+        except Exception:
+            pass
 
 @app.route('/metrics')
 def metrics():
@@ -116,7 +144,3 @@ if __name__ == "__main__":
     logging.getLogger('werkzeug').setLevel(logging.INFO)
 
     app.run(host='0.0.0.0', port='3111')
-
-# if __name__ == "__main__":
-#    logging.basicConfig(filename='app.log',level=logging.DEBUG)
-#    app.run(host='0.0.0.0', port='3111')

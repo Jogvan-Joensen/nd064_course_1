@@ -1,8 +1,43 @@
+# name: TechTrends - Package with Docker
+
+# on:
+#   push:
+#     branches: [ main ]
+
+# jobs:
+#   build-and-push:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout source
+#         uses: actions/checkout@v4
+
+#       - name: Set up QEMU
+#         uses: docker/setup-qemu-action@v3
+
+#       - name: Set up Docker Buildx
+#         uses: docker/setup-buildx-action@v3
+
+#       - name: Login to DockerHub
+#         uses: docker/login-action@v3
+#         with:
+#           username: ${{ vars.DOCKERHUB_USERNAME }}
+#           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+#       - name: Build and push
+#         uses: docker/build-push-action@v6
+#         with:
+#           context: ./project/techtrends
+#           file: ./project/techtrends/Dockerfile
+#           push: true
+#           platforms: linux/amd64
+#           tags: ${{ vars.DOCKERHUB_USERNAME }}/techtrends:latest
+
 name: TechTrends - Package with Docker
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main ]           
+    tags: [ 'v*' ]             
 
 jobs:
   build-and-push:
@@ -22,12 +57,31 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ${{ vars.DOCKERHUB_USERNAME }}/techtrends
+          
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}    # "latest" på main
+            type=sha,format=short                                 # kort SHA, fx sha-abc1234
+            type=ref,event=tag                                    # semver fra git tag (v1.2.3 -> 1.2.3, 1.2, 1)
+          
+          labels: |
+            org.opencontainers.image.source=${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.url=https://github.com/${{ github.repository }}
 
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: ./project/techtrends
           file: ./project/techtrends/Dockerfile
-          push: true
           platforms: linux/amd64
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/techtrends:latest
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}        
+          labels: ${{ steps.meta.outputs.labels }}    
+
