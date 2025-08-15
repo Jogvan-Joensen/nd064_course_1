@@ -4,25 +4,22 @@ docker build -t techtrends .
 ## Docker commands used to run the application
 docker run -d --name techtrends -p 7111:3111 techtrends
 
-## Docker commands used to get the application logs
-docker logs -f techtrends
+## Docker command used to get the application logs
+docker logs 4a1749aec0cd 2>&1   # 4a1749aec0cd == container ID (replace)
+
 
 ## Logs from the container running the TechTrends application
-INFO:werkzeug: * Running on http://172.17.0.2:3111/ (Press CTRL+C to quit)
-12/08/2025, 20:56:41, "About us" page was retrieved!
-INFO:werkzeug:172.17.0.1 - - [12/Aug/2025 20:56:41] "GET /about HTTP/1.1" 200 -
-INFO:werkzeug:172.17.0.1 - - [12/Aug/2025 20:56:41] "GET /static/css/main.css HTTP/1.1" 304 -
-12/08/2025, 20:57:22, Post: "CNCF Cloud Native Interactive Landscape" was retrieved!
-INFO:werkzeug:172.17.0.1 - - [12/Aug/2025 20:57:22] "GET /4 HTTP/1.1" 200 -
-INFO:werkzeug:172.17.0.1 - - [12/Aug/2025 20:57:22] "GET /static/css/main.css HTTP/1.1" 304 -
-12/08/2025, 20:57:28, Post with ID: "42" does not exists!
-INFO:werkzeug:172.17.0.1 - - [12/Aug/2025 20:57:28] "GET /42 HTTP/1.1" 404 -
-INFO:werkzeug:172.17.0.1 - - [12/Aug/2025 20:57:28] "GET /static/css/main.css HTTP/1.1" 304 -
-INFO:werkzeug:172.17.0.1 - - [12/Aug/2025 20:58:46] "GET /create HTTP/1.1" 200 -
-INFO:werkzeug:172.17.0.1 - - [12/Aug/2025 20:58:46] "GET /static/css/main.css HTTP/1.1" 304 -
-12/08/2025, 20:59:17, New post: "Testing Log Titel" was created!
-INFO:werkzeug:172.17.0.1 - - [12/Aug/2025 20:59:17] "POST /create HTTP/1.1" 302 -
-INFO:werkzeug:172.17.0.1 - - [12/Aug/2025 20:59:17] "GET / HTTP/1.1" 200 -
-INFO:werkzeug:172.17.0.1 - - [12/Aug/2025 20:59:17] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:app:15/08/2025, 13:52:21,  * Running on http://172.17.0.2:3111/ (Press CTRL+C to quit)
+INFO:app:15/08/2025, 13:53:55, 172.17.0.1 - - [15/Aug/2025 13:53:55] "GET / HTTP/1.1" 200 -
+INFO:app:15/08/2025, 13:53:55, 172.17.0.1 - - [15/Aug/2025 13:53:55] "GET /static/css/main.css HTTP/1.1" 200 -
+INFO:app:15/08/2025, 13:53:55, 172.17.0.1 - - [15/Aug/2025 13:53:55] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:app:15/08/2025, 13:54:03, 15/08/2025, 13:54:03, "About us" page was retrieved!
+INFO:app:15/08/2025, 13:54:03, 172.17.0.1 - - [15/Aug/2025 13:54:03] "GET /about HTTP/1.1" 200 -
+INFO:app:15/08/2025, 13:54:03, 172.17.0.1 - - [15/Aug/2025 13:54:03] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:app:15/08/2025, 13:54:19, 15/08/2025, 13:54:19, Post: "2020 CNCF Annual Report" was retrieved!
+INFO:app:15/08/2025, 13:54:19, 172.17.0.1 - - [15/Aug/2025 13:54:19] "GET /1 HTTP/1.1" 200 -
+INFO:app:15/08/2025, 13:54:19, 172.17.0.1 - - [15/Aug/2025 13:54:19] "GET /static/css/main.css HTTP/1.1" 304 -
+ERROR:app:15/08/2025, 13:54:25, 15/08/2025, 13:54:25, 404: Post with ID "42" does not exist!
+INFO:app:15/08/2025, 13:54:25, 172.17.0.1 - - [15/Aug/2025 13:54:25] "GET /42 HTTP/1.1" 404 -
+INFO:app:15/08/2025, 13:54:25, 172.17.0.1 - - [15/Aug/2025 13:54:25] "GET /static/css/main.css HTTP/1.1" 304 -
 
- 

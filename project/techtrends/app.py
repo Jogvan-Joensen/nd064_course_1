@@ -40,17 +40,16 @@ def index():
     return render_template('index.html', posts=posts)
 
 # Define how each individual article is rendered 
-# If the post ID is not found a 404 page is shown
 @app.route('/<int:post_id>')
 def post(post_id):
     post = get_post(post_id)
     if post is None:
-      app.logger.info(datetime.now().strftime('%d/%m/%Y, %H:%M:%S') + f', Post with ID: "{post_id}" does not exists!')
-      return render_template('404.html'), 404
+        app.logger.error(datetime.now().strftime('%d/%m/%Y, %H:%M:%S') + f', 404: Post with ID "{post_id}" does not exist!')
+        return render_template('404.html'), 404
     else:
-      title = post["title"]
-      app.logger.info(datetime.now().strftime('%d/%m/%Y, %H:%M:%S') + f', Post: "{title}" was retrieved!')
-      return render_template('post.html', post=post)
+        title = post["title"]
+        app.logger.info(datetime.now().strftime('%d/%m/%Y, %H:%M:%S') + f', Post: "{title}" was retrieved!')
+        return render_template('post.html', post=post)
 
 # Define the About Us page
 @app.route('/about')
@@ -130,17 +129,31 @@ def create():
     return render_template('create.html')
 
 # start the application on port 3111
+# start the application on port 3111
 if __name__ == "__main__":
     import logging
     import sys
 
-    logging.basicConfig(level=logging.INFO)  
-    app.logger.setLevel(logging.INFO)
-    app.logger.propagate = False            
-    
-    if not app.logger.handlers:
-        app.logger.addHandler(logging.StreamHandler(sys.stdout))
+    # STDOUT handler til INFO og DEBUG
+    stdout_handler = logging.StreamHandler(sys.stdout)
+    stdout_handler.setLevel(logging.DEBUG)
+    stdout_handler.setFormatter(logging.Formatter('%(levelname)s:app:%(asctime)s, %(message)s', "%d/%m/%Y, %H:%M:%S"))
 
-    logging.getLogger('werkzeug').setLevel(logging.INFO)
+    # STDERR handler til ERROR og højere
+    stderr_handler = logging.StreamHandler(sys.stderr)
+    stderr_handler.setLevel(logging.ERROR)
+    stderr_handler.setFormatter(logging.Formatter('%(levelname)s:app:%(asctime)s, %(message)s', "%d/%m/%Y, %H:%M:%S"))
+
+    # Ryd og tilføj handlers
+    app.logger.handlers = []
+    app.logger.addHandler(stdout_handler)
+    app.logger.addHandler(stderr_handler)
+    app.logger.setLevel(logging.DEBUG)  
+    app.logger.propagate = False
+
+    # Werkzeug logger til stdout
+    werkzeug_logger = logging.getLogger('werkzeug')
+    werkzeug_logger.setLevel(logging.INFO)
+    werkzeug_logger.addHandler(stdout_handler)
 
     app.run(host='0.0.0.0', port='3111')
